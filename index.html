@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>아빠딸 엄마아들</title>
+    <meta name="title" content="아빠딸 엄마아들">
+    <meta name="subject" content="얼굴로 보는 인공지능 닮은꼴 찾기">
+    <meta name="keywords"
+          content=", 인공지능 닮은꼴 찾기, 아빠딸, 엄마딸, 아빠, 엄마, 닮은꼴, 인공지능">
+    <meta name="author" content="IF">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<!--    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61ee5a7599c9c84f"></script>-->
+
+    <!--    crop-->
+    <!--    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+    <!--    <link rel="stylesheet" type="text/css" href="https://fengyuanchen.github.io/cropperjs/css/cropper.css">-->
+    <!--    <script type="text/javascript" src="https://fengyuanchen.github.io/cropper/js/cropper.js"></script>-->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.css"
+          integrity="sha512-+VDbDxc9zesADd49pfvz7CgsOl2xREI/7gnzcdyA9XjuTxLXrdpuz21VVIqc5HPfZji2CypSbxx1lgD7BgBK5g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.js"
+            integrity="sha512-ZK6m9vADamSl5fxBPtXw6ho6A4TuX89HUbcfvxa2v2NYNT/7l8yFGJ3JlXyMN4hlNbz0il4k6DvqbIW5CCwqkw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <!--    <script type="text/javascript" src="./capture.js">-->
+</head>
+
+<body>
+<section class="section">
+    <!--    <div class="d-flex justify-content-center mb-5 maruburi ">-->
+    <!--        &lt;!&ndash;        <a class="d-flex justify-content-center mb-5" href="https://ablink.kr">&ndash;&gt;-->
+    <!--        가족 닮은 꼴-->
+    <!--        &lt;!&ndash;            <img src="img/title.png" class="mb-5" id="title">&ndash;&gt;-->
+    <!--        &lt;!&ndash;        </a>&ndash;&gt;-->
+    <!--    </div>-->
+
+    <div class="" id="top">
+        <a class="d-flex justify-content-center" href="">
+            <img src="img/title.png" class="mb-4" id="logo"> </a>
+    </div>
+
+
+    <!--    <div class="" style="background-color: #fafafa">-->
+    <!--        <a class="d-flex justify-content-center" href="https://ablink.kr">-->
+    <!--            <img src="img/group.png" class="mb-5 mt-4" id="group"></a>-->
+    <!--    </div>-->
+
+</section>
+<!--<section class="youtube pb-3" id="yotube-mid-link">-->
+</section>
+<!--<div class="gender-div mt-5">-->
+<!--    <div class="d-flex justify-content-center">-->
+<!--        <p class="d-flex align-items-center pr-3 maruburi">여성</p>-->
+<!--        <div onclick="changeGender()">-->
+<!--            <input type="checkbox" id="gender">-->
+<!--            <label class="" for="gender" style="">-->
+<!--                <img id="gender-button" src="img/gender-girl.png">-->
+<!--            </label>-->
+<!--        </div>-->
+<!--        <p class="d-flex align-items-center pl-3 maruburi">남성</p>-->
+<!--    </div>-->
+<!--</div>-->
+<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<div class="container">
+    <!--    <img src="img/test3.jpg" id="test3" onclick="getCropData(event)">-->
+    <div class="image-upload-wrap">
+        <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*"/>
+        <div class="drag-text" onclick="">
+            <div class="background-rectangle">
+                <img id="background" src="img/background.png">
+                <img src="img/background_img.png" class="background-image">
+                <p id="background-text"> 정확한 측정을 위해
+                    얼굴 정면이 나온 사진을 골라주세요! </p>
+                <div id="loading" class="animated bounce">
+                    <div class="spinner-border" style="width: 5rem; height: 5rem; margin-top: 50px" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p class="maruburi text-center mt-5 mb-5" id="process-word">얼굴을찾고있어요</p>
+                </div>
+            </div>
+        </div>
+        <div class="background-rectangle" style="display: none">
+            <img src="img/background.png">
+        </div>
+    </div>
+
+    <div style="display: none" class="camera-wrap">
+        <video id="video">Video stream not available.</video>
+        <!--        <button id="startbutton">Take photo</button>-->
+    </div>
+
+    <div class="camera-div mb-5">
+        <!--        <section class="flex mt-5" style="text-align: center;">-->
+        <!--            <div id="take-picture">-->
+        <!--                <img class="image-camera" src="img/camera.png">-->
+        <!--                <div class="maruburi text-camera" onclick="startup();">사진찍기</div>-->
+        <!--            </div>-->
+        <!--            <div id="album-div">-->
+        <!--                <input class="file-upload-input2" type='file' onchange="readURL(this);" accept="image/*"/>-->
+        <!--                <img class="image-camera" src="img/album.png">-->
+        <!--                <div class="maruburi">앨범선택</div>-->
+        <!--            </div>-->
+        <!--            <p> 테스트</p>-->
+        <!--        </section>-->
+        <div id="picture-pick">
+            <p id="take-picture">사진 선택하기
+                <input class="file-upload-input2" type='file' onchange="readURL(this);" accept="image/*"/>
+            </p>
+            <p id="take-now" onclick="startup()">지금 촬영하기</p>
+            <p id="re-choice">다시 선택할래요
+                <input class="file-upload-input2" type='file' onchange="readURL(this);" accept="image/*"/>
+            </p>
+            <P id="choice-face">아빠를 선택해주세요</P>
+        </div>
+        <div id="pick-done">
+            <p id="pick-done-text" onclick="pickDone()">선택완료</p>
+        </div>
+
+    </div>
+
+
+    <div class="file-upload-content">
+        <!--        <div id="loading" class="animated bounce">-->
+        <!--            <div class="spinner-border" style="width: 5rem; height: 5rem; margin-top: 50px" role="status">-->
+        <!--                <span class="sr-only">Loading...</span>-->
+        <!--            </div>-->
+        <!--            <p class="maruburi text-center mt-5 mb-5" id="process-word">분석중입니다.</p>-->
+        <!--        </div>-->
+        <p class="result-message"></p>
+        <div id="label-container" class="d-flex flex-column justify-content-around mt-5 mb-5"></div>
+        <!--        <div class="addthis_inline_share_toolbox mt-5 mb-5"></div>-->
+
+        <!--        <div class="pt-3 image-title-wrap">-->
+        <!--            <button type="button p-2" class="try-again-btn" onclick="gaReload1();">-->
+        <!--                <span class="try-again-text">다른 사진으로 재시도</span>-->
+        <!--            </button>-->
+        <!--        </div>-->
+    </div>
+</div>
+
+<div id="result-container" style="display: none">
+    <div id="parent-picture">
+        <div id="father-div">
+            <span class="rank" id="father-score"></span>
+            <img id="father-face">
+            <div id="father-block"></div>
+        </div>
+
+        <div id="mother-div">
+            <span class="rank" id="mother-score"></span>
+            <img id="mother-face">
+            <div id="mother-block"></div>
+        </div>
+        <span id="vs">vs</span>
+    </div>
+    <div id="child-picture">
+        <img id="baby-face">
+    </div>
+    <div id="last-message">
+        <p id="question-message">누구를 더 닮았을까?</p>
+        <p id="re-choice2" onclick="window.location.reload()">다시하기</p>
+    </div>
+
+</div>
+<div class="d-flex justify-content-center mb-5">
+    <p id="notice">사용자의 사진은 어디에도 저장되지 않습니다.</p>
+</div>
+<canvas id="canvas">
+</canvas>
+
+<div style="display: none" class="output">
+    <img id="photo" alt="The screen capture will appear in this box.">
+</div>
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+<footer class="footer container d-flex justify-content-center">
+    <div>
+        <p id="footer-name">&copy; Idea Factory </p>
+    </div>
+</footer>
+<!-- Modal -->
+<!--<div class="modal fade" id="adModal" tabindex="-1" role="dialog" aria-labelledby="adModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog" role="document">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="adModalLabel">(AD)광고 - 재시도를 한번 더 눌러주세요.</h5>-->
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--            <div class="modal-body d-flex justify-content-center">-->
+<!--                <ins class="kakao_ad_area" style="display:none;"-->
+<!--                     data-ad-unit="DAN-t89oh3sc0ew5"-->
+<!--                     data-ad-width="300"-->
+<!--                     data-ad-height="250"></ins>-->
+<!--            </div>-->
+<!--            <div class="modal-footer d-flex justify-content-center">-->
+<!--                <button type="button p-2" class="try-again-btn" onclick="gaReload2();">-->
+<!--                    <span class="try-again-text">다른 사진으로 재시도</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<script>
+    function gaReload1() {
+        window.location.reload();
+    }
+
+    function gaReload2() {
+        window.location.reload();
+    }
+</script>
+
+<noscript>Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+<script>
+    var imageName;
+    var inputFile
+    let detectedPoints;
+    let inputData;
+
+    function getFace(imgName) {
+        const formData = new FormData()
+        formData.append("name", imgName)
+
+        fetch("http://182.162.22.42:6003/img_face"
+            , {
+                mode: 'cors',
+                method: "post",
+                headers: {
+                    // 'Accept': 'application/json, application/xml, text/plain, text/html, *.*, image/jpeg',
+                    // 'Content-Type': 'multipart/form-data'
+                },
+                body: formData || null,
+            }
+        ).then(res => res.blob())
+            .then(res => {
+                $('.container').hide();
+                $('#result-container').show();
+                const imgUrl = URL.createObjectURL(res)
+                if (imgName.includes("father")) {
+                    $('#father-face').attr('src', imgUrl);
+                } else if (imgName.includes("mother")) {
+                    $('#mother-face').attr('src', imgUrl);
+                } else if (imgName.includes("baby")) {
+                    $('#baby-face').attr('src', imgUrl);
+                }
+                // $('#result-img').attr('src', imgUrl);
+                console.log(imgName + imgUrl)
+                // viewFace(imgUrl)
+
+            })
+    }
+
+
+    function getImageApi(imgName, imageRes) {
+        const formData = new FormData()
+        formData.append("name", imgName)
+
+        fetch("http://182.162.22.42:6003/img2"
+            , {
+                mode: 'cors',
+                method: "post",
+                headers: {
+                    // 'Accept': 'application/json, application/xml, text/plain, text/html, *.*, image/jpeg',
+                    // 'Content-Type': 'multipart/form-data'
+                },
+                body: formData || null,
+            }
+        ).then(res => res.blob())
+            .then(res => {
+                const imgUrl = URL.createObjectURL(res)
+                $('#background').attr('src', imgUrl);
+                // console.log(imgUrl)
+                // drawQuestMark(res.res)
+
+                viewFaceResult(imgUrl, imageRes)
+                $('#choice-face').show();
+                $('#re-choice').hide();
+                $('#background').css("filter", "blur(0px)");
+                // $('#re-choice').css("background-color","#FFFFFF");
+            })
+    }
+
+    function deleteQuestionMark() {
+        resJson = {}
+        resForm = new FormData()
+        const questMarks = document.getElementsByClassName("question-mark")
+        const questSelect = document.getElementsByClassName("question-select")
+        const questLength = questMarks.length
+        for (let i = 0; i < questLength; i++) {
+            questMarks[0].remove()
+        }
+        const selectLength = questSelect.length
+        for (let i = 0; i < selectLength; i++) {
+            questSelect[0].remove()
+        }
+
+        var alarm = document.getElementById('re-choice3')
+        alarm.id = "choice-face"
+        alarm.innerText = "아빠를 선택해주세요"
+    }
+
+    function drawQuestionMark() {
+        if (Object.keys(resJson).length != 0) {
+            deleteQuestionMark()
+        }
+        const background = document.getElementById("background");
+        const backgroundRect = document.getElementsByClassName("background-rectangle")[0];
+        const imageWidth = background.offsetWidth
+        const imageHeight = background.offsetHeight
+
+        let srcWidth = background.naturalWidth
+        let srcHeight = background.naturalHeight
+
+
+        const xRate = imageWidth / srcWidth
+        const yRate = imageHeight / srcHeight
+
+
+        for (const data of detectedPoints) {
+            var element = document.createElement("span")
+            element.innerText = "?"
+            element.classList.add("question-mark")
+            const resX = data[0] + data[2] / 2
+            const resY = data[1] + data[3] / 3
+            const resHeight = data[3] * yRate / 2
+            element.style.left = resX * xRate - 5 + "px"
+            element.style.top = resY * yRate - 20 - resHeight + "px"
+            element.style.position = "absolute"
+            // element.onclick = (event, text) => clickQuestion(event, text)
+            // element.onclick.caller = clickQuestion()
+            backgroundRect.appendChild(element)
+        }
+    }
+
+    function clickQuestion(tag, text) {
+        console.log("click question")
+        // const tag = event.target
+        // tagName = tag.tagName.toLowerCase()
+        // if (tagName != "span") {
+        //     return
+        // }
+        tag.style.left = tag.style.left.split("px")[0] * 1 - 18 + "px"
+        tag.style.paddingLeft = "8px"
+        tag.style.paddingRight = "8px"
+        tag.style.paddingTop = "1px"
+        tag.style.paddingBottom = "1px"
+        tag.className = "question-select"
+        if (text == "father") {
+            tag.innerText = "아빠"
+        } else if (text == "mother") {
+            tag.innerText = "엄마"
+        } else if (text == "baby") {
+            tag.innerText = "아이"
+        }
+        // tag.innerText = text
+
+    }
+
+    function fetchCompare(formData) {
+        formData.append("name", imageName)
+        fetch("http://182.162.22.42:6003/compare"
+            , {
+                mode: 'cors',
+                method: "post",
+                headers: {
+                    // 'Accept': 'application/json, application/xml, text/plain, text/html, *.*, image/jpeg',
+                    // 'Content-Type': 'multipart/form-data'
+                },
+                body: formData || null,
+            }
+        ).then(res => res.json())
+            .then(res => {
+                imageTime = res.time
+                var compareScore = res.compare_score
+                // const imgUrl = URL.createObjectURL(res)
+                console.log('imageTime' + imageTime)
+                console.log('compareScore' + compareScore)
+                getFace(imageTime + "_father.jpg")
+                getFace(imageTime + "_mother.jpg")
+                getFace(imageTime + "_baby.jpg")
+                $("#loading").hide()
+
+                count(compareScore)
+
+                // getImageApi(imageName, res.res)
+                // viewFaceResult(imgUrl)
+                // $('#loading').hide();
+                // $('#group').hide();
+            })
+    }
+
+    async function count(compareScore) {
+        var data = document.getElementsByClassName('rank');
+        // var fatherSpan = document.getElementById('father-score');
+        // var motherSpan = document.getElementById('mother-score');
+        var questionP = document.getElementById('question-message');
+
+        var motherScore = compareScore[0]
+        var fatherScore = compareScore[1]
+        await sleep(2000)
+        $("#vs").hide()
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        for (var i = 0; i < 100; i++) {
+            data[0].innerHTML = Math.floor(Math.random() * 100) + "%"
+            data[1].innerHTML = Math.floor(Math.random() * 100) + "%"
+            await sleep(40)
+            // console.log(i)
+        }
+        data[0].innerHTML = (fatherScore * 100).toFixed(0) + "%"
+        data[1].innerHTML = (motherScore * 100).toFixed(0) + "%"
+
+        var resultText = "";
+        if (motherScore > fatherScore) {
+            changeRankCss("#mother")
+            resultText = "엄마 닮았네!"
+        } else if (fatherScore > motherScore) {
+            changeRankCss("#father")
+            resultText = "아빠 닮았네!"
+        }
+        // $("#question-message").innerText = resultText
+        questionP.innerText = resultText
+        $("#re-choice2").show()
+    }
+
+    function changeRankCss(parent) {
+        $(parent + "-face").css("font-size", "60px")
+
+        $(parent + "-face").css("width", "120px")
+        $(parent + "-face").css("height", "120px")
+        // $(parent + "-face").css("border", "solid")
+
+        $(parent + "-score").css("letter-spacing", "-3.5px")
+        $(parent + "-score").css("-webkit-text-stroke", "-3.5px")
+        $(parent + "-score").css("bottom", "108px")
+        $(parent + "-score").css("font-size", "60px")
+    }
+
+
+    function fetchApi(formData) {
+        fetch("http://182.162.22.42:6003/api"
+            , {
+                mode: 'cors',
+                method: "post",
+                headers: {
+                    // 'Accept': 'application/json, application/xml, text/plain, text/html, *.*, image/jpeg',
+                    // 'Content-Type': 'multipart/form-data'
+                },
+                body: formData || null,
+            }
+        ).then(res => res.json())
+            .then(res => {
+
+                imageName = res.name
+                // const imgUrl = URL.createObjectURL(res)
+                console.log('name' + imageName)
+                console.log('res' + res.res)
+                detectedPoints = res.res
+                getImageApi(imageName, res.res)
+                drawQuestionMark()
+                // viewFaceResult(imgUrl)
+                $('#loading').hide();
+                // $('#group').hide();
+            })
+    }
+
+    function findExtension(name) {
+        let nameList = name.split('.')
+        let extensionIndex = nameList.length - 1
+        let extension = nameList[extensionIndex]
+        return extension
+    }
+
+    function takepicture(width, height) {
+        $('#pick-done-text').css("background-color", "#ffa552")
+        let background = document.getElementById("background")
+        var context = canvas.getContext('2d', {alpha: false});
+        // $('.output').show();
+        if (width && height) {
+            canvas.width = width * 3;
+            canvas.height = height * 3;
+            context.drawImage(video, 0, 0, width * 3, height * 3);
+            // context.drawImage(#background, 0, 0, width * 3, height * 3);
+            // $('.gender-div').hide();
+            // $('.camera-div').hide();
+            $('.camera-wrap').hide();
+            // $('.image-upload-wrap').show();
+            // $('#loading').show();
+            // $('#loading').show();
+            $('.file-upload-content').show();
+            $('.image-upload-wrap').show();
+            $('#background-text').hide()
+            $('.background-image').hide()
+
+            var data = canvas.toDataURL('image/jpeg');
+            // photo.setAttribute('src', data);
+            background.setAttribute('src', data);
+
+            var blob = dataURItoBlob(data);
+            inputData = new FormData()
+            inputData.append('img', blob)
+            inputData.append('extension', 'jpg')
+            // formData.append('gender', "M")
+
+            console.log(blob)
+            console.log(blob.toString())
+            $("#pick-done-text").attr("onClick", "pickDone()");
+            // fetchApi(formData)
+        } else {
+            // clearphoto();
+        }
+    }
+
+    function dataURItoBlob(dataURI) {
+        var byteString = atob(dataURI.split(',')[1]);
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+
+        var bb = new Blob([ab], {"type": mimeString});
+        return bb;
+    }
+
+
+    function startup() {
+        let width = $(".file-upload-input").width();
+        // let height = $(".file-upload-input").height();
+        // let width = 512
+        // let height = 512
+
+        let streaming = false;
+        video = document.getElementById('video');
+        canvas = document.getElementById('canvas');
+        photo = document.getElementById('photo');
+        let takeNow = document.getElementById('take-now');
+        takeNow.innerText = "사진 찍기"
+        takeNow.style.width = "100%"
+        takeNow.addEventListener('click', function (ev) {
+            takepicture(width, height);
+            ev.preventDefault();
+        }, false);
+        $('.image-upload-wrap').hide();
+        $('#take-picture').hide();
+        $('.camera-wrap').show();
+        // document.getElementById("album-div").style.marginLeft = 0
+
+
+        navigator.mediaDevices.getUserMedia({video: true, audio: false})
+            .then(function (stream) {
+                video.srcObject = stream;
+                video.play();
+            })
+            .catch(function (err) {
+                console.log("An error occurred: " + err);
+            });
+
+        video.addEventListener('canplay', function (ev) {
+            if (!streaming) {
+                height = video.videoHeight / (video.videoWidth / width);
+
+                // Firefox currently has a bug where the height can't be read from
+                // the video, so we will make assumptions if this happens.
+
+                if (isNaN(height)) {
+                    height = width / (4 / 3);
+                }
+
+                video.setAttribute('width', width);
+                video.setAttribute('height', height);
+                canvas.setAttribute('width', width);
+                canvas.setAttribute('height', height);
+                streaming = true;
+            }
+        }, false);
+
+        // startbutton.addEventListener('click', function (ev) {
+        //     takepicture(width, height);
+        //     ev.preventDefault();
+        // }, false);
+        // clearphoto();
+    }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            // inputFile = input
+            const width = $('.background-rectangle').width;
+            const height = $('.background-rectangle').height;
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                // $('.image-upload-wrap').hide();
+                // $('.gender-div').hide();
+                // $('.camera-div').hide();
+                $('#background').attr('src', e.target.result);
+                $('#background-text').hide()
+                $('.background-image').hide()
+                $('#re-choice').show()
+                $('#take-now').hide()
+                $('#take-picture').hide()
+                $('#pick-done-text').css("background-color", "#ffa552")
+
+                // $('.file-upload-content').show();
+                // $('#loading').show();
+                // $('#background').css("filter","blur(4px)");
+                // $('.image-title').html(input.files[0].name);
+
+            };
+            let blobData = new Blob([input.files[0]])
+            reader.readAsDataURL(input.files[0]);
+            $("#pick-done-text").attr("onClick", "pickDone()");
+            inputData = new FormData()
+            inputData.append('img', blobData)
+            inputData.append('extension', findExtension(input.files[0].name))
+
+            // 다시 시작할 때 초기화
+            resJson = {}
+            resForm = new FormData()
+
+
+        } else {
+            removeUpload();
+        }
+    }
+
+    function pickDone() {
+
+        if (inputData == undefined) {
+            alert("사진을 선택해주세요")
+            return;
+        }
+
+        $('.file-upload-content').show();
+        // $('#picture-pick').hide();
+        $('#take-now').hide()
+        $('#loading').show();
+        $('#background').css("filter", "blur(4px)");
+        // $('#re-choice').css("background-color", "#FFFFFF");
+        // $('#re-choice').innerText = "";
+
+        // blobData = new Blob([inputFile.files[0]])
+        // const formData = new FormData()
+        // formData.append('img', blobData)
+        // formData.append('extension', findExtension(inputFile.files[0].name))
+
+        // console.log(blobData.toString())
+        fetchApi(inputData)
+    }
+
+    function removeUpload() {
+        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+        $('.file-upload-content').hide();
+        $('.image-upload-wrap').show();
+    }
+
+    $('.image-upload-wrap').bind('dragover', function () {
+        $('.image-upload-wrap').addClass('image-dropping');
+    });
+    $('.image-upload-wrap').bind('dragleave', function () {
+        $('.image-upload-wrap').removeClass('image-dropping');
+    });
+</script>
+<!-- css -->
+
+
+</script>
+
+<script>
+    let labelContainer;
+    var point;
+    var imageRes;
+    var resJson = {}
+    var clickFlag = false
+    let resForm = new FormData()
+    let indexList = []
+
+    function checkRange(event) {
+        var alarm = document.getElementById('choice-face')
+        const backgroundTag = document.getElementById('background')
+        const questionMarks = document.getElementsByClassName("question-mark")
+        let imageWidth = backgroundTag.offsetWidth;
+        let imageHeight = backgroundTag.offsetHeight;
+
+        let srcWidth = backgroundTag.naturalWidth
+        let srcHeight = backgroundTag.naturalHeight
+
+        console.log("srcWidth" + srcWidth + "srcHeight" + srcHeight)
+
+        let widthRate = srcWidth / imageWidth
+        let heightRate = srcHeight / imageHeight
+
+        console.log("x" + event.x + " Y" + event.y)
+
+        let x = event.offsetX * widthRate
+        // let x = event.offsetX
+        let y = event.offsetY * heightRate
+        // let y = event.offsetY
+
+        console.log("offsetX" + x + " offsetY" + y)
+
+        let resJsonLength = Object.keys(resJson).length
+
+        let answer = 0
+        let selectedRes;
+        let selectedSpan
+
+        for (var [index, points] of imageRes.entries()) {
+            var pointX = points[0] + points[2] / 2
+            var pointY = points[1] + points[3] / 2
+            var width = points[2] * widthRate / 2
+            var height = points[3] * heightRate / 2
+
+
+            let distance = (x - pointX) * (x - pointX) + (y - pointY) * (y - pointY)
+            if (answer == 0 || answer > distance) {
+                answer = distance
+                selectedRes = imageRes[index]
+                selectedSpan = calSpanDistance(questionMarks, widthRate, heightRate, pointX, pointY, points)
+            }
+
+
+            //
+            // if ((pointX - width) <= x && x <= (pointX + width) && (pointY - height) <= y && y <= (pointY + height)) {
+            //     let key;
+            //     if (resJsonLength == 0) {
+            //         key = 'father'
+            //         alarm.innerText = "엄마를 선택해주세요"
+            //         alarm.style.animationDuration = "0.3s"
+            //         alarm.style.animationName = "reverse-slidein"
+            //     } else if (resJsonLength == 1) {
+            //         key = 'mother'
+            //         alarm.innerText = "아이를 선택해주세요"
+            //         alarm.style.animationDuration = "0.3s"
+            //         alarm.style.animationName = "slidein"
+            //     } else if (resJsonLength == 2) {
+            //         key = 'baby'
+            //     }
+            //     resJson[key] = imageRes[index]
+            //     resForm.append(key, imageRes[index])
+
+
+            // draw(pointX, pointY, width, height)
+            // break
+        }
+        for (let index in resJson){
+            if(resJson[index] == selectedRes){
+                alert("다른 얼굴을 선택해주세요")
+                return
+            }
+        }
+
+        let key;
+        if (resJsonLength == 0) {
+            key = 'father'
+            alarm.innerText = "엄마를 선택해주세요"
+            alarm.style.animationDuration = "0.3s"
+            alarm.style.animationName = "reverse-slidein"
+        } else if (resJsonLength == 1) {
+            key = 'mother'
+            alarm.innerText = "아이를 선택해주세요"
+            alarm.style.animationDuration = "0.3s"
+            alarm.style.animationName = "slidein"
+        } else if (resJsonLength == 2) {
+            key = 'baby'
+        }
+
+        resJson[key] = selectedRes
+        resForm.append(key, selectedRes)
+
+
+        clickQuestion(selectedSpan, key)
+
+
+        // let resJsonLength2 = Object.keys(resJson).length
+        // if (resJsonLength == resJsonLength2) {
+        //     alert("얼굴을 선택해주세요")
+        //     return
+        // }
+
+
+        if (resJsonLength == 2) {
+            // $(".result-message").hide()
+
+            // $('#choice-face').show();
+            // $('#re-choice').show();
+            // $('#choice-face').hide();
+            alarm.id = "re-choice3"
+            alarm.innerText = "다시하기"
+            alarm.onclick = drawQuestionMark
+
+            $("#pick-done-text").attr("onClick", "pickDoneFace()");
+            // $("#re-choice").attr("onClick", "drawQuestionMark()");
+        }
+
+
+        // let compareJsonLength = Object.keys(resJson).length
+        // if (resJsonLength != compareJsonLength) {
+        //     alert("박스 안을 클릭해주세요")
+        // }
+    }
+
+    function calSpanDistance(questionMarks, widthRate, heightRate, pointX, pointY, points) {
+        let answer = 0;
+        let selectedSpan;
+        let i = 0
+        for (const mark of questionMarks) {
+            let markX = mark.offsetLeft * widthRate + 5
+            let markY = mark.offsetTop * heightRate + 15 + points[3] * heightRate / 2
+            let distance = (markX - pointX) * (markX - pointX) + (markY - pointY) * (markY - pointY)
+            if (answer == 0 || answer > distance) {
+                answer = distance
+                selectedSpan = questionMarks[i]
+            }
+            i++
+        }
+        return selectedSpan
+
+    }
+
+    function pickDoneFace() {
+        const length = Object.keys(resJson).length
+        if (length != 3) {
+            alert("얼굴을 선택해주세요")
+            return
+        }
+        document.getElementById("process-word").innerText = ""
+        $("#loading").show()
+        fetchCompare(resForm)
+        $("#pick-done-text").attr("onClick", "");
+        // $("#pick-done-text").unbind("click");
+
+
+    }
+
+    function draw(x, y) {
+        var canvas = document.getElementById('result-img');
+        if (canvas.getContext) {
+            var ctx = canvas.getContext('2d');
+
+            // ctx.fillRect(25, 25, 100, 100);
+            // ctx.clearRect(45, 45, 60, 60);
+            // ctx.strokeRect(x, y, width, height);
+            ctx.font = '20px';
+            ctx.fillText('Hello world', x, y);
+            console.log("draw text x: " + x + " y: " + y)
+        }
+    }
+
+    function getCropData(event) {
+        var xOffset = document.getElementById('background').offsetLeft;
+        var xCoordinate = event.clientX;
+        var yOffset = document.getElementById('background').offsetTop;
+        var yCoordinate = event.clientY;
+
+        let imageWidth = document.getElementById('background').offsetWidth;
+        let imageHeight = document.getElementById('background').offsetHeight;
+
+        let widthRate = 512 / imageWidth
+        let heightRate = 512 / imageHeight
+
+        let x = event.offsetX * widthRate
+        let y = event.offsetY * heightRate
+
+        // console.log(xCoordinate, yCoordinate, xOffset, yOffset)
+        console.log(x, y)
+        console.log(imageRes)
+
+        // checkRange(event)
+
+    }
+
+    function viewFace(blob) {
+        // var alarm = "<div id='alarm'>" + "아빠를 선택해주세요" + "</div>"
+        var framePhoto = "<div class='frame_wrap'>" + "<img src='' id='result-img' >" + "</div>"
+
+        $('.result-message').html("<div>" + framePhoto + "</div>");
+        $('#result-img').attr('src', blob);
+    }
+
+    function viewFaceResult(blob, res) {
+        // $('.result-message').html("<div>" + framePhoto + "</div>");
+
+        $('#background').attr('onclick', "getCropData(event)");
+        imageRes = res
+
+
+        if (clickFlag == false) {
+            $("#pick-done-text").attr("onClick", "pickDoneFace()");
+            let body = document.querySelector("body")
+            body.addEventListener('click', (event) => {
+                let target = event.target
+                const tagName = target.tagName.toLowerCase()
+                if (target == event.currentTarget.querySelector("#background")) {
+                    // if (tagName == "span") {
+                    checkRange(event)
+                    console.log('in test3')
+                } else {
+                    console.log("out test3")
+                }
+                // this.removeEventListener('click', event)
+            })
+            clickFlag = true
+        }
+        // crop();
+
+    }
+
+</script>
+</body>
+<!--
+image input box
+Copyright (c) 2020 by Aaron Vanston (https://codepen.io/aaronvanston/pen/yNYOXR)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+-->
+
+</html>
+
