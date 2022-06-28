@@ -18,7 +18,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
-<!--    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61ee5a7599c9c84f"></script>-->
+    <!--    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61ee5a7599c9c84f"></script>-->
 
     <!--    crop-->
     <!--    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
@@ -86,7 +86,7 @@
                     <div class="spinner-border" style="width: 5rem; height: 5rem; margin-top: 50px" role="status">
                         <span class="sr-only">Loading...</span>
                     </div>
-                    <p class="maruburi text-center mt-5 mb-5" id="process-word">얼굴을찾고있어요</p>
+                    <p class="text-center mt-5 mb-5" id="process-word">얼굴을 찾고있어요</p>
                 </div>
             </div>
         </div>
@@ -436,17 +436,22 @@
             await sleep(40)
             // console.log(i)
         }
-        data[0].innerHTML = (fatherScore * 100).toFixed(0) + "%"
-        data[1].innerHTML = (motherScore * 100).toFixed(0) + "%"
 
         var resultText = "";
         if (motherScore > fatherScore) {
+            motherScore = Math.ceil(motherScore * 100)
+            fatherScore = Math.floor(fatherScore * 100)
             changeRankCss("#mother")
             resultText = "엄마 닮았네!"
         } else if (fatherScore > motherScore) {
+            fatherScore = Math.ceil(fatherScore * 100)
+            motherScore = Math.floor(motherScore * 100)
             changeRankCss("#father")
             resultText = "아빠 닮았네!"
         }
+
+        data[0].innerHTML = fatherScore + "%"
+        data[1].innerHTML = motherScore + "%"
         // $("#question-message").innerText = resultText
         questionP.innerText = resultText
         $("#re-choice2").show()
@@ -479,7 +484,13 @@
             }
         ).then(res => res.json())
             .then(res => {
+                const detectLength = res.res.length
 
+                if (detectLength < 3) {
+                    alert("얼굴이 세 개 이상 있는 사진으로 시도해주세요")
+                    window.location.reload()
+                    // return
+                }
                 imageName = res.name
                 // const imgUrl = URL.createObjectURL(res)
                 console.log('name' + imageName)
@@ -489,8 +500,9 @@
                 drawQuestionMark()
                 // viewFaceResult(imgUrl)
                 $('#loading').hide();
-                // $('#group').hide();
             })
+
+        // $('#group').hide();
     }
 
     function findExtension(name) {
@@ -772,8 +784,8 @@
             // draw(pointX, pointY, width, height)
             // break
         }
-        for (let index in resJson){
-            if(resJson[index] == selectedRes){
+        for (let index in resJson) {
+            if (resJson[index] == selectedRes) {
                 alert("다른 얼굴을 선택해주세요")
                 return
             }
