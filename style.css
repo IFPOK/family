@@ -739,6 +739,7 @@ video {
 }
 
 #background-text {
+    width: 70%;
     position: absolute;
     font-family: LeeSeoyun;
     font-style: normal;

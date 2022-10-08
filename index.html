@@ -90,8 +90,8 @@
             <div class="background-rectangle">
                 <img id="background" src="img/background.png">
                 <img src="img/background_img.png" class="background-image">
-                <p id="background-text"> 정확한 측정을 위해
-                    얼굴 정면이 나온 가족 사진을 골라주세요! </p>
+                <p id="background-text"> 정확한 측정을 위해 얼굴 정면이 나온 <br>
+                    가족 사진을 골라주세요! </p>
                 <div id="loading" class="animated bounce">
                     <div class="spinner-border" style="width: 5rem; height: 5rem; margin-top: 50px" role="status">
                         <span class="sr-only">Loading...</span>
@@ -295,7 +295,7 @@
                     $('#baby-face').attr('src', imgUrl);
                 }
                 // $('#result-img').attr('src', imgUrl);
-                console.log(imgName + imgUrl)
+                // console.log(imgName + imgUrl)
                 // viewFace(imgUrl)
 
             })
@@ -384,12 +384,13 @@
     }
 
     function clickQuestion(tag, text) {
-        console.log("click question")
+        // console.log("click question")
         // const tag = event.target
         // tagName = tag.tagName.toLowerCase()
         // if (tagName != "span") {
         //     return
         // }
+
         tag.style.left = tag.style.left.split("px")[0] * 1 - 18 + "px"
         tag.style.paddingLeft = "8px"
         tag.style.paddingRight = "8px"
@@ -424,8 +425,8 @@
                 imageTime = res.time
                 var compareScore = res.compare_score
                 // const imgUrl = URL.createObjectURL(res)
-                console.log('imageTime' + imageTime)
-                console.log('compareScore' + compareScore)
+                // console.log('imageTime' + imageTime)
+                // console.log('compareScore' + compareScore)
                 getFace(imageTime + "_father.jpg")
                 getFace(imageTime + "_mother.jpg")
                 getFace(imageTime + "_baby.jpg")
@@ -518,8 +519,8 @@
                 }
                 imageName = res.name
                 // const imgUrl = URL.createObjectURL(res)
-                console.log('name' + imageName)
-                console.log('res' + res.res)
+                // console.log('name' + imageName)
+                // console.log('res' + res.res)
                 detectedPoints = res.res
                 getImageApi(imageName, res.res)
                 drawQuestionMark()
@@ -568,8 +569,8 @@
             inputData.append('extension', 'jpg')
             // formData.append('gender', "M")
 
-            console.log(blob)
-            console.log(blob.toString())
+            // console.log(blob)
+            // console.log(blob.toString())
             $("#pick-done-text").attr("onClick", "pickDone()");
             // fetchApi(formData)
         } else {
@@ -620,7 +621,7 @@
                 video.play();
             })
             .catch(function (err) {
-                console.log("An error occurred: " + err);
+                // console.log("An error occurred: " + err);
             });
 
         video.addEventListener('canplay', function (ev) {
@@ -763,7 +764,6 @@
     var clickFlag = false
     let resForm = new FormData()
     let indexList = []
-
     function checkRange(event) {
         var alarm = document.getElementById('choice-face')
         const backgroundTag = document.getElementById('background')
@@ -774,19 +774,19 @@
         let srcWidth = backgroundTag.naturalWidth
         let srcHeight = backgroundTag.naturalHeight
 
-        console.log("srcWidth" + srcWidth + "srcHeight" + srcHeight)
+        // console.log("srcWidth" + srcWidth + "srcHeight" + srcHeight)
 
         let widthRate = srcWidth / imageWidth
         let heightRate = srcHeight / imageHeight
 
-        console.log("x" + event.x + " Y" + event.y)
+        // console.log("x" + event.x + " Y" + event.y)
 
         let x = event.offsetX * widthRate
         // let x = event.offsetX
         let y = event.offsetY * heightRate
         // let y = event.offsetY
 
-        console.log("offsetX" + x + " offsetY" + y)
+        // console.log("offsetX" + x + " offsetY" + y)
 
         let resJsonLength = Object.keys(resJson).length
 
@@ -832,6 +832,11 @@
             // draw(pointX, pointY, width, height)
             // break
         }
+
+        if (resJsonLength == 3) {
+            alert("선택완료 눌러주세요")
+            return
+        }
         for (let index in resJson) {
             if (resJson[index] == selectedRes) {
                 alert("다른 얼굴을 선택해주세요")
@@ -857,9 +862,7 @@
         resJson[key] = selectedRes
         resForm.append(key, selectedRes)
 
-
         clickQuestion(selectedSpan, key)
-
 
         // let resJsonLength2 = Object.keys(resJson).length
         // if (resJsonLength == resJsonLength2) {
@@ -932,7 +935,7 @@
             // ctx.strokeRect(x, y, width, height);
             ctx.font = '20px';
             ctx.fillText('Hello world', x, y);
-            console.log("draw text x: " + x + " y: " + y)
+            // console.log("draw text x: " + x + " y: " + y)
         }
     }
 
@@ -952,8 +955,8 @@
         let y = event.offsetY * heightRate
 
         // console.log(xCoordinate, yCoordinate, xOffset, yOffset)
-        console.log(x, y)
-        console.log(imageRes)
+        // console.log(x, y)
+        // console.log(imageRes)
 
         // checkRange(event)
 
@@ -983,9 +986,9 @@
                 if (target == event.currentTarget.querySelector("#background")) {
                     // if (tagName == "span") {
                     checkRange(event)
-                    console.log('in test3')
+                    // console.log('in test3')
                 } else {
-                    console.log("out test3")
+                    // console.log("out test3")
                 }
                 // this.removeEventListener('click', event)
             })
