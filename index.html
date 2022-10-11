@@ -36,7 +36,11 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CHWJ0V4L5W"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'G-CHWJ0V4L5W');
@@ -127,7 +131,7 @@
             <p id="take-picture">사진 선택하기
                 <input class="file-upload-input2" type='file' onchange="readURL(this);" accept="image/*"/>
             </p>
-<!--            <p id="take-now" onclick="startup()">지금 촬영하기</p>-->
+            <!--            <p id="take-now" onclick="startup()">지금 촬영하기</p>-->
             <p id="re-choice">다시 선택할래요
                 <input class="file-upload-input2" type='file' onchange="readURL(this);" accept="image/*"/>
             </p>
@@ -362,10 +366,8 @@
         let srcWidth = background.naturalWidth
         let srcHeight = background.naturalHeight
 
-
         const xRate = imageWidth / srcWidth
         const yRate = imageHeight / srcHeight
-
 
         for (const data of detectedPoints) {
             var element = document.createElement("span")
@@ -423,6 +425,10 @@
         ).then(res => res.json())
             .then(res => {
                 imageTime = res.time
+                if (res.status == "E"){
+                    alert("다른사진으로 시도해주세요")
+                    return
+                }
                 var compareScore = res.compare_score
                 // const imgUrl = URL.createObjectURL(res)
                 // console.log('imageTime' + imageTime)
@@ -764,6 +770,7 @@
     var clickFlag = false
     let resForm = new FormData()
     let indexList = []
+
     function checkRange(event) {
         var alarm = document.getElementById('choice-face')
         const backgroundTag = document.getElementById('background')
@@ -776,8 +783,8 @@
 
         // console.log("srcWidth" + srcWidth + "srcHeight" + srcHeight)
 
-        let widthRate = srcWidth / imageWidth
-        let heightRate = srcHeight / imageHeight
+        let widthRate = imageWidth / srcWidth
+        let heightRate = imageHeight / srcHeight
 
         // console.log("x" + event.x + " Y" + event.y)
 
@@ -799,7 +806,6 @@
             var pointY = points[1] + points[3] / 2
             var width = points[2] * widthRate / 2
             var height = points[3] * heightRate / 2
-
 
             let distance = (x - pointX) * (x - pointX) + (y - pointY) * (y - pointY)
             if (answer == 0 || answer > distance) {
