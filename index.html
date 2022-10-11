@@ -427,7 +427,7 @@
                 imageTime = res.time
                 if (res.status == "E"){
                     alert("다른사진으로 시도해주세요")
-                    return
+                    window.location.reload()
                 }
                 var compareScore = res.compare_score
                 // const imgUrl = URL.createObjectURL(res)
