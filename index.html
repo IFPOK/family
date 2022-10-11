@@ -366,8 +366,8 @@
         let srcWidth = background.naturalWidth
         let srcHeight = background.naturalHeight
 
-        const xRate = imageWidth / srcWidth
-        const yRate = imageHeight / srcHeight
+        const xRate = srcWidth / imageWidth
+        const yRate = srcHeight / imageHeight
 
         for (const data of detectedPoints) {
             var element = document.createElement("span")
