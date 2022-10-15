@@ -375,9 +375,9 @@
             element.classList.add("question-mark")
             const resX = data[0] + data[2] / 2
             const resY = data[1] + data[3] / 3
-            const resHeight = data[3] * yRate / 2
+            const resHeight = data[3] / 2
             element.style.left = resX * xRate - 5 + "px"
-            element.style.top = resY * yRate - 20 - resHeight + "px"
+            element.style.top = resY * yRate - 20 - resHeight * yRate + "px"
             element.style.position = "absolute"
             // element.onclick = (event, text) => clickQuestion(event, text)
             // element.onclick.caller = clickQuestion()
@@ -425,7 +425,7 @@
         ).then(res => res.json())
             .then(res => {
                 imageTime = res.time
-                if (res.status == "E"){
+                if (res.status == "E") {
                     alert("다른사진으로 시도해주세요")
                     window.location.reload()
                 }
@@ -803,9 +803,9 @@
 
         for (var [index, points] of imageRes.entries()) {
             var pointX = points[0] + points[2] / 2
-            var pointY = points[1] + points[3] / 2
-            var width = points[2] * widthRate / 2
-            var height = points[3] * heightRate / 2
+            var pointY = points[1] + points[3] / 3
+            // var width = points[2] * widthRate / 2
+            // var height = points[3] * heightRate / 2
 
             let distance = (x - pointX) * (x - pointX) + (y - pointY) * (y - pointY)
             if (answer == 0 || answer > distance) {
@@ -904,7 +904,7 @@
         let i = 0
         for (const mark of questionMarks) {
             let markX = mark.offsetLeft * widthRate + 5
-            let markY = mark.offsetTop * heightRate + 15 + points[3] * heightRate / 2
+            let markY = mark.offsetTop * heightRate + 20 + points[3]  / 2
             let distance = (markX - pointX) * (markX - pointX) + (markY - pointY) * (markY - pointY)
             if (answer == 0 || answer > distance) {
                 answer = distance
