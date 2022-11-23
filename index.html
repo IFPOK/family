@@ -31,6 +31,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.js"
             integrity="sha512-ZK6m9vADamSl5fxBPtXw6ho6A4TuX89HUbcfvxa2v2NYNT/7l8yFGJ3JlXyMN4hlNbz0il4k6DvqbIW5CCwqkw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6375e0288daf8286"></script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CHWJ0V4L5W"></script>
@@ -86,6 +87,7 @@
 <!--    </div>-->
 <!--</div>-->
 <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
 <div class="container">
     <!--    <img src="img/test3.jpg" id="test3" onclick="getCropData(event)">-->
     <div class="image-upload-wrap">
@@ -139,6 +141,7 @@
         </div>
         <div id="pick-done">
             <p id="pick-done-text" onclick="pickDone()">선택완료</p>
+
         </div>
 
     </div>
@@ -187,8 +190,11 @@
     </div>
 
 </div>
-<div class="d-flex justify-content-center mb-5">
+<div class="d-flex justify-content-center mb-3">
     <p id="notice">사용자의 사진은 어디에도 저장되지 않습니다.</p>
+</div>
+<div id="share-sns">
+    <div class="addthis_inline_share_toolbox d-flex justify-content-center mt-3 mb-3"></div>
 </div>
 <!-- 박정민 수정 시작_20220704_쿠팡광고 -->
 <div class="d-flex justify-content-center mb-5">
@@ -904,7 +910,7 @@
         let i = 0
         for (const mark of questionMarks) {
             let markX = mark.offsetLeft * widthRate + 5
-            let markY = mark.offsetTop * heightRate + 20 + points[3]  / 2
+            let markY = mark.offsetTop * heightRate + 20 + points[3] / 2
             let distance = (markX - pointX) * (markX - pointX) + (markY - pointY) * (markY - pointY)
             if (answer == 0 || answer > distance) {
                 answer = distance

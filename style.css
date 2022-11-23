@@ -1277,6 +1277,9 @@ width: 100%;
     #footer-name {
         font-size: 10px;
     }
+    #share-sns{
+        zoom: 0.9;
+    }
 }
 
 @media screen and (max-width: 1000px) {
